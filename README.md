@@ -66,7 +66,7 @@ router.delete('/:id', deleteTodoList);
  so each module in the controller will give appropriate messages
 
 In controller the data send and accepted are scrutinized using error boundary
-500  server Error 
+500  Server Error 
 200  Response OK
 400  Invalid request. Missing required fields.
 404  Data not Found
@@ -74,3 +74,37 @@ In controller the data send and accepted are scrutinized using error boundary
 # environment variables in .env file
 PORT=4000
 MONGO_URI=mongodb+srv://deepz:deepz123@mern-project-todolist.kyulzo0.mongodb.net/?retryWrites=true&w=majority&appName=Mern-Project-todolist
+
+# postman Testing
+
+## create Todo
+
+POST -> http://localhost:4000/api/todolist 
+click RAW-> Click JSON-> Paste below
+    
+    { "title": "Your Todo Title",
+    "description": "Your description",
+    "active": true,
+    "completionDate": "2025-11-01T00:00:00.000Z"}
+
+## update Todo
+
+PATCH ->http://localhost:4000/api/todolist/68e379aea033b794ed945536
+click RAW-> Click JSON-> Paste below
+    
+    { "title": "Your Todo Title",
+    "description": "Your description",
+    "active": true,
+    "completionDate": "2025-11-01T00:00:00.000Z"}
+
+## get All Todo
+
+GET -> http://localhost:4000/api/todolist
+
+## get Single Todo
+
+GET -> http://localhost:4000/api/todolist/68e379aea033b794ed945536
+
+## Delete Single Todo
+
+Delete -> http://localhost:4000/api/todolist/68e379aea033b794ed945536
