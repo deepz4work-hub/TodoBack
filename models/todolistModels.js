@@ -1,14 +1,16 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const {Schema} = mongoose
 
-const todoListSchema = new Schema({
+const todoSchema = new Schema({
     title: {
         type: String,
-        required: true
+
+        required: [true, 'Title is required'], 
     },
     description: {
         type: String
     },
+
     active: {
         type: Boolean,
         default: false
@@ -17,12 +19,11 @@ const todoListSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    completionDate: {
+    completionDate : {
         type: Date,
-        required: true
+         required: [true, 'Completion date is required'],
     }   
-},
-{ timestamps: true }
+}
     );
 
-module.exports = mongoose.model('TodoList', todoListSchema);
+module.exports = mongoose.model('todoList', todoSchema);

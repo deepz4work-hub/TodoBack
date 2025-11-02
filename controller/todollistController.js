@@ -1,4 +1,4 @@
-const { get } = require("mongoose");
+
 const control = require("../models/todolistModels");
 
 const deleteTodoList = async (req, res) => {
@@ -6,7 +6,7 @@ const deleteTodoList = async (req, res) => {
   if (!id) {
     return res.status(400).json({
       success: false,
-      msg: "Invalid request. Missing required fields",
+      msg: "Invalid fields",
     });
   }
 
@@ -20,7 +20,7 @@ const deleteTodoList = async (req, res) => {
     }
     return res.status(200).json({
       success: true,
-      msg: "Data found and deleted successfully",
+      msg: "deleted successfully",
     });
   } catch (error) {
     {
@@ -34,7 +34,6 @@ const deleteTodoList = async (req, res) => {
 };
 
 const createTodoList = async (req, res) => {
-   console.log(`🚀 Got in create`);
   if (
     !req.body ||
     req.body.title === undefined ||
@@ -42,7 +41,7 @@ const createTodoList = async (req, res) => {
   ) {
     return res.status(400).json({
       success: false,
-      msg: "Invalid request. Missing required fields.",
+      msg: "Invalid fields.",
     });
   }
   try {
@@ -56,30 +55,25 @@ const createTodoList = async (req, res) => {
       completionDate: new Date(completionDate),
     });
 
-    console.log("✅ New todo created:", newTodo);
-    
+ 
     // Return success response with the created todo data
     return res.status(200).json({
       success: true,
-      msg: "Todo created successfully",
+      msg: "created successfully",
       data: {
         _id: newTodo._id,
         title: newTodo.title,
         description: newTodo.description,
         active: newTodo.active,
         createDate: newTodo.createDate,
-        completionDate: newTodo.completionDate,
-        createdAt: newTodo.createdAt,
-        updatedAt: newTodo.updatedAt,
-        __v: newTodo.__v
+        completionDate: newTodo.completionDate
       }
     });
     
   } catch (err) {
-    console.error("❌ Create Todo Error:", err);
     return res.status(500).json({
       success: false,
-      msg: "Server Error",
+      msg: "server error",
       error: err.message,
       details: "Check server console for full error details"
     });
@@ -95,7 +89,7 @@ const updateTodoList = async (req, res) => {
   ) {
     return res.status(400).json({
       success: "false",
-      msg: "Invalid request. Missing required fields.",
+      msg: "knvalid fields.",
     });
   }
   try {
@@ -115,12 +109,12 @@ const updateTodoList = async (req, res) => {
     }
     return res.status(200).json({
       success: true,
-      msg: "Data updated successfully",
+      msg: "updated successfully",
     });
   } catch (err) {
     return res.status(500).json({
       success: false,
-      msg: "Server Error",
+      msg: "server error",
       error: err.message,
     });
   }
@@ -140,18 +134,18 @@ const getTodoList = async (req, res) => {
     if (todos.length == 0) {
       return res.status(404).json({
         success: false,
-        msg: "Data not found",
+        msg: "data not found",
       });
     }
     return res.status(200).json({
       success: true,
-      msg: "Data fetched successfully",
+      msg: "fetched successfully",
       data: todos,
     });
   } catch (err) {
     return res.status(500).json({
       success: false,
-      msg: "Server Error",
+      msg: "server wrror",
     });
   }
 };
